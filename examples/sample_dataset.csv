@@ -1,0 +1,12 @@
+prompt,expected_output,model_output
+"What is 2+2?","4","4"
+"What is the capital of France?","Paris","Paris"
+"Explain photosynthesis in one sentence.","Photosynthesis is the process by which plants convert sunlight into energy.","Photosynthesis is when plants use sunlight to make food."
+"What is the largest planet in our solar system?","Jupiter","Jupiter"
+"Who wrote Romeo and Juliet?","William Shakespeare","Shakespeare"
+"What is the speed of light?","299,792,458 meters per second","Approximately 300,000 km/s"
+"What is the chemical formula for water?","H2O","H2O"
+"What year did World War II end?","1945","1945"
+"What is the smallest prime number?","2","2"
+"What is the boiling point of water at sea level?","100 degrees Celsius","100°C"
+

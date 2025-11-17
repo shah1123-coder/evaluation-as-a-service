@@ -1,0 +1,12 @@
+prompt,expected_output,model_output
+"What is the capital of France?","The capital of France is Paris.","Paris is the capital of France."
+"Who wrote 'To Kill a Mockingbird'?","Harper Lee wrote 'To Kill a Mockingbird'.","The author of 'To Kill a Mockingbird' is Harper Lee."
+"What is the chemical formula for water?","The chemical formula for water is H₂O.","Water's formula is H2O."
+"When was the Declaration of Independence signed?","The Declaration of Independence was signed on July 4, 1776.","It was signed in 1776."
+"What is the largest planet in our solar system?","Jupiter is the largest planet in our solar system.","Saturn is the biggest planet."
+"Who painted the Mona Lisa?","Leonardo da Vinci painted the Mona Lisa.","The Mona Lisa was painted by Vincent van Gogh."
+"What is the speed of light in a vacuum?","The speed of light in a vacuum is approximately 299,792 kilometers per second.","Light travels at about 300,000 km/s in a vacuum."
+"What is the main component of the Sun?","The Sun is primarily composed of hydrogen (about 74%) and helium (about 24%).","The Sun is mostly made of hydrogen and helium."
+"What is the largest ocean on Earth?","The Pacific Ocean is the largest ocean on Earth.","The Atlantic Ocean is the largest."
+"Who developed the theory of relativity?","Albert Einstein developed the theory of relativity.","Einstein is known for his theory of relativity."
+

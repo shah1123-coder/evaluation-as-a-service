@@ -1,0 +1,114 @@
+name: Model Evaluation
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Prepare evaluation dataset
+        run: |
+          # This is an example - replace with your actual dataset preparation
+          cat > evaluation_dataset.json << EOF
+          [
+            {
+              "prompt": "What is 2+2?",
+              "expected_output": "4",
+              "model_output": "4"
+            },
+            {
+              "prompt": "What is the capital of France?",
+              "expected_output": "Paris",
+              "model_output": "Paris"
+            }
+          ]
+          EOF
+      
+      - name: Run evaluation
+        id: eval
+        run: |
+          RESPONSE=$(curl -X POST ${{ secrets.EAAS_URL }}/api/evaluations/run \
+            -H "Content-Type: application/json" \
+            -d @- << EOF
+          {
+            "dataset_name": "CI Test Dataset",
+            "model_version": "${{ github.sha }}",
+            "rubric_name": "accuracy",
+            "threshold": 0.8,
+            "items": $(cat evaluation_dataset.json)
+          }
+          EOF
+          )
+          
+          echo "Response: $RESPONSE"
+          EVAL_ID=$(echo $RESPONSE | jq -r '.evaluation_id')
+          echo "eval_id=$EVAL_ID" >> $GITHUB_OUTPUT
+      
+      - name: Wait for evaluation to complete
+        run: |
+          EVAL_ID="${{ steps.eval.outputs.eval_id }}"
+          MAX_WAIT=300  # 5 minutes
+          ELAPSED=0
+          
+          while [ $ELAPSED -lt $MAX_WAIT ]; do
+            STATUS_RESPONSE=$(curl -s "${{ secrets.EAAS_URL }}/api/evaluations/status?id=$EVAL_ID")
+            STATUS=$(echo $STATUS_RESPONSE | jq -r '.status')
+            
+            echo "Evaluation status: $STATUS"
+            
+            if [ "$STATUS" = "completed" ]; then
+              echo "Evaluation completed!"
+              echo "$STATUS_RESPONSE" > eval_result.json
+              break
+            elif [ "$STATUS" = "failed" ]; then
+              echo "Evaluation failed!"
+              exit 1
+            fi
+            
+            sleep 10
+            ELAPSED=$((ELAPSED + 10))
+          done
+          
+          if [ $ELAPSED -ge $MAX_WAIT ]; then
+            echo "Evaluation timed out!"
+            exit 1
+          fi
+      
+      - name: Check evaluation results
+        run: |
+          RESULT=$(cat eval_result.json)
+          PASSED=$(echo $RESULT | jq -r '.passed')
+          AVG_SCORE=$(echo $RESULT | jq -r '.average_score')
+          THRESHOLD=$(echo $RESULT | jq -r '.threshold')
+          
+          echo "Average Score: $AVG_SCORE"
+          echo "Threshold: $THRESHOLD"
+          echo "Passed: $PASSED"
+          
+          if [ "$PASSED" = "false" ]; then
+            echo "❌ Evaluation failed: Score $AVG_SCORE is below threshold $THRESHOLD"
+            exit 1
+          else
+            echo "✅ Evaluation passed: Score $AVG_SCORE meets threshold $THRESHOLD"
+          fi
+      
+      - name: Upload evaluation results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: evaluation-results
+          path: eval_result.json
+

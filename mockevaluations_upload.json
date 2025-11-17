@@ -1,0 +1,53 @@
+[
+  {
+    "prompt": "What is the capital of France?",
+    "expected_output": "The capital of France is Paris.",
+    "model_output": "Paris is the capital of France."
+  },
+  {
+    "prompt": "Who wrote 'To Kill a Mockingbird'?",
+    "expected_output": "Harper Lee wrote 'To Kill a Mockingbird'.",
+    "model_output": "The author of 'To Kill a Mockingbird' is Harper Lee."
+  },
+  {
+    "prompt": "What is the chemical formula for water?",
+    "expected_output": "The chemical formula for water is H₂O.",
+    "model_output": "Water's formula is H2O."
+  },
+  {
+    "prompt": "When was the Declaration of Independence signed?",
+    "expected_output": "The Declaration of Independence was signed on July 4, 1776.",
+    "model_output": "It was signed in 1776."
+  },
+  {
+    "prompt": "What is the largest planet in our solar system?",
+    "expected_output": "Jupiter is the largest planet in our solar system.",
+    "model_output": "Saturn is the biggest planet."
+  },
+  {
+    "prompt": "Who painted the Mona Lisa?",
+    "expected_output": "Leonardo da Vinci painted the Mona Lisa.",
+    "model_output": "The Mona Lisa was painted by Vincent van Gogh."
+  },
+  {
+    "prompt": "What is the speed of light in a vacuum?",
+    "expected_output": "The speed of light in a vacuum is approximately 299,792 kilometers per second.",
+    "model_output": "Light travels at about 300,000 km/s in a vacuum."
+  },
+  {
+    "prompt": "What is the main component of the Sun?",
+    "expected_output": "The Sun is primarily composed of hydrogen (about 74%) and helium (about 24%).",
+    "model_output": "The Sun is mostly made of hydrogen and helium."
+  },
+  {
+    "prompt": "What is the largest ocean on Earth?",
+    "expected_output": "The Pacific Ocean is the largest ocean on Earth.",
+    "model_output": "The Atlantic Ocean is the largest."
+  },
+  {
+    "prompt": "Who developed the theory of relativity?",
+    "expected_output": "Albert Einstein developed the theory of relativity.",
+    "model_output": "Einstein is known for his theory of relativity."
+  }
+]
+

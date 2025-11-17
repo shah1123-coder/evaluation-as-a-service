@@ -1,0 +1,9 @@
+supabase==2.3.4
+python-dotenv==1.0.0
+openai==1.12.0
+anthropic==0.18.1
+nltk==3.8.1
+rouge-score==0.1.2
+scikit-learn==1.4.0
+numpy==1.26.3
+
